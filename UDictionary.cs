@@ -13,7 +13,6 @@ public class UDictionary<K, V> : ISerializationCallbackReceiver
 	private List<K> keys;
 	[SerializeField]
 	private List<V> values;
-	[SerializeField]
 	private int length;
 
 	public UDictionary()
@@ -32,7 +31,7 @@ public class UDictionary<K, V> : ISerializationCallbackReceiver
 		{
 			ResetSize();
 
-			int i = 0;
+            int i = 0;
 			foreach (var kvp in backingDictionary)
 			{
 				if (i >= length) { break; }
@@ -49,7 +48,7 @@ public class UDictionary<K, V> : ISerializationCallbackReceiver
 		{
 			ResetSize();
 
-			backingDictionary = new Dictionary<K, V>();
+			backingDictionary.Clear();
 
 			for (int i = 0; i < length; i++)
 			{
@@ -60,10 +59,6 @@ public class UDictionary<K, V> : ISerializationCallbackReceiver
 				if (!backingDictionary.ContainsKey(key))
 				{
 					backingDictionary.Add(key, value);
-				}
-				else
-				{
-					backingDictionary[key] = value;
 				}
 			}
 		}
@@ -88,7 +83,7 @@ public class UDictionary<K, V> : ISerializationCallbackReceiver
 
 			for (int i = 0; i < numOfElements; i++)
 			{
-				keys[i] = oldKeys[i];
+                keys[i] = oldKeys[i];
 			}
 		} //if the number of values is different
 		else
@@ -98,7 +93,7 @@ public class UDictionary<K, V> : ISerializationCallbackReceiver
 
 			for (int i = 0; i < numOfElements; i++)
 			{
-				values[i] = oldVals[i];
+                values[i] = oldVals[i];
 			}
 		}
 
@@ -174,15 +169,5 @@ public class UDictionary<K, V> : ISerializationCallbackReceiver
 		{
 			return backingDictionary.Count;
 		}
-	}
-
-	public bool Equals(Object obj)
-	{
-		return backingDictionary.Equals(obj);
-	}
-
-	public Dictionary<K, V>.Enumerator GetEnumerator()
-	{
-		return backingDictionary.GetEnumerator();
 	}
 }
